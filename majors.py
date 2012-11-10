@@ -1,4 +1,5 @@
-class major(object):
+class Major(object):
 	def __init__(self, name):
-		moves=[]
-	def act(x, enemy)
+		moves={}
+
+
