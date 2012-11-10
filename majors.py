@@ -9,7 +9,10 @@ class Major(object):
 
 class EECS(Major):
 	def __init__(self, name):
-		self.moves={'Infinite Recursion':InfiniteRecursion, 'Abstraction Barrier':AbstractionBarrier, 'Pop': Pop, 'Hackathon Fuel': HackathonFuel }
+		self.moves={'Infinite Recursion':InfiniteRecursion, 
+					'Abstraction Barrier':AbstractionBarrier, 
+					'Pop': Pop, 
+					'Hackathon Fuel': HackathonFuel }
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(EECS=.5, History=2)
 	
@@ -58,7 +61,10 @@ class EECS(Major):
 
 class History(Major):
 	def __init__(self, name):
-		self.moves={'Craft Paper':ResearchCraft, 'Flintlock':Flintlock, 'Trivia':Trivial, 'Time Travel':Timeshift}
+		self.moves={'Craft Paper':ResearchCraft, 
+					'Flintlock':Flintlock, 
+					'Trivia':Trivial, 
+					'Time Travel':Timeshift}
 		self.multipliers=Major.multipliers.copy()
 		self.multipliers.update(MCB=2, EECS=.5)
 
@@ -116,7 +122,10 @@ class History(Major):
 
 class MCB(Major):
 	def __init__(self, name):
-		self.moves={'Point Mutation': PointMutation, 'Set Curve':SetCurve, 'Photosynthesis':Photosynthesis,'Mitosis':Mitosis}
+		self.moves={'Point Mutation': PointMutation, 
+					'Set Curve':SetCurve, 
+					'Photosynthesis':Photosynthesis,
+					'Mitosis':Mitosis}
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(History=.5, Haas=2)
 
@@ -172,7 +181,10 @@ class MCB(Major):
 
 class Haas(Major):
 	def __init__(self, name):
-		self.moves={'Business Plan': BPlan, 'Brag':Brag, 'Analyze': Analy, 'Glare':Glare}
+		self.moves={'Business Plan': BPlan, 
+					'Brag':Brag, 
+					'Analyze': Analy, 
+					'Glare':Glare}
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(MCB=.5, EECS=2)
 	def BPlan(self, enemy):
