@@ -340,7 +340,7 @@ class MCB(Major):
 	def SetCurve(self,enemy):
 		energycost = 40
 		if self.energy < energycost:
-			print(enemy.name+" was too tired to do that!")
+			print(self.name+" was too tired to do that!")
 			return
 		print(self.name+" sets the curve!")
 		time.sleep(1)
