@@ -48,14 +48,69 @@ class EECS(Major):
 			self.energy+=20
 			print("Your energy increases to "+ str(self.energy) +" points.")
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 5942ada06ac7493d1b672d0367d762441e10693e
 
 class History(Major):
 	def __init__(self, name):
-		self.moves={}
-		self.multipliers=major.multipliers.copy()
+		self.moves={'Craft Paper':ResearchCraft, 'Flintlock':Flintlock, 'Trivia':Trivial, 'Time Travel':Timeshift}
+		self.multipliers=Major.multipliers.copy()
 		self.multipliers.update(MCB=2, EECS=.5)
+
+	def ResearchCraft(self, enemy):
+		energycost=30
+		if self.energy<energycost:
+			return str(self.name)+" was too tired to do that!"
+		self.energy-=energycost
+		print(self.name,"crafted a research paper!")
+		time.sleep(1)
+		print("RESEARCH THIS")
+		time.sleep(1)
+		#enemy.hp-=int(.75*self.atk*self.multipliers[enemy.major])-enemy.defense
+		dmg=int(.75*self.atk*self.multipliers[enemy.Major])-enemy.defense
+		print(enemy.name, "doesn't understand this...took", dmg, "damage!")
+		time.sleep(1)
+		enemy.hp-=dmg
+	
+	def Trivial(self, enemy):
+		energycost=5
+		if self.energy<energycost:
+			return str(self.name)+" was too tired to do that!"
+		self.energy-=energycost
+		print("'Did you know that the tenth President of the United States has two living grandsons today?'")
+		dmg=int(.25*self.atk*self.multipliers[enemy.Major])-enemy.defense
+		time.sleep(1)
+		print(enemy.name, "'s mind was blown for", dmg, "damage!")
+		time.sleep(1)
+		enemy.hp-=dmg
+
+	def Timeshift(self, enemy):
+		energycost=50
+		if self.energy<energycost:
+			return str(self.name)+" was too tired to do that!"
+		self.energy-=energycost
+		print("You're at the Battle Stalingrad!")
+		time.sleep(1)
+		dmg=int(self.atk*(enemy.hp/enemy.maxhp)*self.multipliers[enemy.Major])-enemy.defense
+		print(enemy.name, "was caught in crossfire for",dmg,"damage!")
+		time.sleep(1)
+		enemy.hp-=dmg
+	def Flintlock(self, enemy):
+		energycost=20
+		if self.energy<energycost:
+			return str(self.name)+" was too tired to do that!"
+		self.energy-=energycost
+		print(self.name, "shoots", enemy.name,"!" )
+		time.sleep(1)
+		dmg=int(.60*self.atk*self.multipliers[enemy.Major])-enemy.defense
+		print(enemy.name, "bled for", dmg, "damage!")
+		time.sleep(1)
+		enemy.hp-=dmg
+
+
 
 class MCB(Major):
 	def __init__(self, name):
@@ -99,6 +154,7 @@ class MCB(Major):
 			self.defense*=2
 		print(self.name+"'s defense increases to "+str(self.defense)+" points.")
 
+<<<<<<< HEAD
 
 
 
@@ -109,8 +165,52 @@ class MCB(Major):
 
 
 
+=======
+>>>>>>> 5942ada06ac7493d1b672d0367d762441e10693e
 class Haas(Major):
 	def __init__(self, name):
-		self.moves={}
+		self.moves={'Business Plan': BPlan, 'Brag':Brag, 'Analyze': Analy, 'Glare':Glare}
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(MCB=.5, EECS=2)
+	def BPlan(self, enemy):
+		energycost=30
+		if self.energy<energycost:
+			return str(self.name)+" was too tired to do that!"
+		self.energy-=energycost
+		print(self.name, "presents their startup idea!")
+		time.sleep(1)
+		print('...')
+		time.sleep(2)
+		dmg=int(.75*self.atk*self.multipliers[enemy.Major])-enemy.defense
+		print("It's too good to be true!", enemy.name, "takes", dmg, "damage!")
+		enemy.hp-=dmg
+	def Brag(self, enemy):
+		energycost=15
+		if self.energy<energycost:
+			return str(self.name)+" was too tired to do that!"
+		self.energy-=energycost
+		print("'I got job offers from ALL of the Big Four! fufufufu")
+		time.sleep(1)
+		dmg=int(.5*self.atk*self.multipliers[enemy.Major])-enemy.defense
+		print(enemy.name, "'s self esteem was hurt for", dmg, "damage!")
+		time.sleep(1)
+		enemy.hp-=dmg
+	def Analy(self, enemy):
+		energycost=10
+		if self.energy<energycost:
+			return str(self.name)+" was too tired to do that!"
+		self.energy-=energycost
+		dmg=int(.25*self.atk*self.multipliers[enemy.Major])-enemy.defense
+		print(self.name, "exposed", enemy.name, "'s financial flaws for", dmg, "damage!")
+		sleep.time(1)
+		enemy.hp-=dmg
+	def Glare(self, enemy):
+		energycost=5
+		if self.energy<energycost:
+			return str(self.name)+" was too tired to do that!"
+		self.energy-=energycost
+		dmg=int(.12*self.atk*self.multipliers[enemy.Major])-enemy.defense
+		print(self.name, "glared at", enemy.name, "for ", dmg, "damage!")
+		sleep.time(1)
+		enemy.hp-=dmg
+
