@@ -206,10 +206,10 @@ class EECS(Major):
 		if self.energy < energycost:
 			print(self.name, " is too tired to do that! Rack up some energy by taking some Hackathon Fuel.")
 			return 
-		self.defense+=2
+		self.defense+=5
 		self.energy-=5
 		time.sleep(1)
-		print(self.name+"'s Abstraction Shield makes "+self.name+" feel safe. "+self.name+"'s defense increases 2 points.")
+		print(self.name+"'s Abstraction Shield makes "+self.name+" feel safe. "+self.name+"'s defense increases 5 points.")
 		print(self.name+"'s energy decreases 5 points.")
 		time.sleep(1)
 
