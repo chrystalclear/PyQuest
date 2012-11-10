@@ -42,15 +42,15 @@ def init_locations():
 
 #Main Function where everything happens
 def main(player):
-	if player.location.name == "Campanile":
-		print('You are at the Campanile')
-	elif player.location.name == "Dorm":
-		print('You are inside your dorm')
-	elif player.location.name == "Outside":
-		print('You are outside')
-	elif player.location.name == "Soda":
-		print('You are inside Soda, floor ' + player.location.floor)
+	location_report(player)
+	print('Type help for available commands\n')
+	action = input('What would you like to do? ')
+	parse_input(action)
 
+def parse_input(action):
+	return 0 #Change later
+
+#Selector function takes in name of location and returns the location object with that name
 def location(name, floor = None):
 	for location in locations:
 		if location.name == name and floor == None:
@@ -60,6 +60,18 @@ def location(name, floor = None):
 				return location
 	return None
 
+#Prints the location of the player
+def location_report(player):
+	if player.location.name == "Campanile":
+		print('You are at the Campanile')
+	elif player.location.name == "Dorm":
+		print('You are inside your dorm')
+	elif player.location.name == "Outside":
+		print('You are outside')
+	elif player.location.name == "Soda":
+		print('You are inside Soda, floor ' + player.location.floor)
+
+#Encounter chance = 5%
 def encounter():
 	if random.random() < 0.05:
 		return True

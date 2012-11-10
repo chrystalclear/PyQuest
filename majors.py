@@ -6,13 +6,18 @@ class Major(object):
 	def get(self, action):
 		if action in self.moves:
 			return self.moves[action]
-		 
+
 class EECS(Major):
 	def __init__(self, name):
 		self.moves={}
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(EECS=.5, History=2)
 	
+	@property
+	def InfiniteRecursion:
+		print("Stack overflow. Opponent "+str(eval(repr(enemy.major)))+" has crashed.")
+		enemy.stats['health'] -= 1 
+		print("Enemy stats: "+str(s) for s in enemy.stats)
 
 class History(Major):
 	def __init__(self, name):
