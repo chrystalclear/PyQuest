@@ -39,10 +39,10 @@ def parse_input(player, action):
 	if action == "help":
 		print("""Type these commands without quotes! Mind case please!
 'advance' : Attempt to get to the next floor. Be careful of fellow students!\n
-'stats' : See your stats. 
+'stats' : See your stats.
 'items' : See your inventory.
 'help' : See this message again!
-'location': See where you are""") 
+'location': See where you are""")
 	elif action == "advance":
 		advance(player)
 	elif action == "stats":
@@ -54,7 +54,7 @@ def parse_input(player, action):
 	else:
 		print("Invalid command")
 		time.sleep(1)
-		
+
 
 def run_battle(player, enemy, win = False, lose = False):
 	while not win and not lose:
@@ -77,7 +77,7 @@ def run_battle(player, enemy, win = False, lose = False):
 			player.hp=100
 			print(player.name+' won!')
 		if not win and not lose:
-			enemy.get(random.choice(list(enemy.moves.keys())))(enemy, player)	
+			enemy.get(random.choice(list(enemy.moves.keys())))(enemy, player)
 			if player.hp <=0:
 					lose=True
 			if enemy.hp<=0:
@@ -95,7 +95,7 @@ def run_battle(player, enemy, win = False, lose = False):
 	if win == True:
 		win = False
 	elif lose == True:
-		player.location.place = 0
+		player.place = 0
 		lose = False
 
 	player.hp, player.energy, enemy.hp, enemy.energy = 100, 100, 100, 100
@@ -104,7 +104,7 @@ def run_battle(player, enemy, win = False, lose = False):
 def display_stats(character):
 	print('\n'+character.name + ': ' + character.major + '\n')
 	print('HP: ' + str(character.hp) + '/' + str(character.max_hp))
-	print('ENERGY: ' + str(character.energy) + '/' + str(character.max_energy )) 
+	print('ENERGY: ' + str(character.energy) + '/' + str(character.max_energy ))
 	print('ATTACK: ' +str(character.atk))
 	print('DEFENSE: ' + str(character.defense) )
 
@@ -183,17 +183,17 @@ class EECS(Major):
 	def __init__(self, name):
 		Major.__init__(self, name)
 		self.multipliers.update(EECS=.5, Haas=2, History=.5)
-	
+
 	def InfiniteRecursion(self,enemy):
 		energycost = 50
 		if self.energy < energycost:
 			print(self.name, " is too tired to do that! Rack up some energy by taking some Hackathon Fuel.")
-			return 
+			return
 		i=0
 		while i<40:
 			print ("Enemy takes 1 point damage")
 			enemy.hp -= 1
-			i+=1 
+			i+=1
 		print("Stack overflow. Maximum recursion depth reached. Opponent "+enemy.name+" has crashed.")
 		self.energy-=50
 		time.sleep(1)
@@ -205,8 +205,13 @@ class EECS(Major):
 		energycost=5
 		if self.energy < energycost:
 			print(self.name, " is too tired to do that! Rack up some energy by taking some Hackathon Fuel.")
+<<<<<<< HEAD
+			return
+		self.defense+=2
+=======
 			return 
 		self.defense+=5
+>>>>>>> 6e6849f58e43bad7362bfbee8486f950e28d0cc7
 		self.energy-=5
 		time.sleep(1)
 		print(self.name+"'s Abstraction Shield makes "+self.name+" feel safe. "+self.name+"'s defense increases 5 points.")
@@ -217,7 +222,7 @@ class EECS(Major):
 		energycost = 10
 		if self.energy < energycost:
 			print(self.name, " is too tired to do that! Rack up some energy by taking some Hackathon Fuel.")
-			return 
+			return
 		dmg =int(1.25*self.atk*self.multipliers[enemy.major])-enemy.defense
 		print(self.name+" pops off",dmg,"of "+enemy.name+"'s health points.")
 		enemy.hp-=dmg
@@ -265,7 +270,7 @@ class History(Major):
 		print(enemy.name, "doesn't understand this...took", dmg, "damage!")
 		time.sleep(1)
 		enemy.hp-=dmg
-	
+
 	def Trivial(self, enemy):
 		energycost=5
 		if self.energy<energycost:
@@ -352,7 +357,7 @@ class MCB(Major):
 		self.energy-=40
 		enemy.hp-=dmg
 		enemy.energy-=edmg
-		print(enemy.name+"'s esteem is lowered, and their health decreases "+str(dmg)+" points and"+enemy.name+"'s energy decreases "+str(edmg)+" points.")
+		print(self.name+"'s esteem is lowered, and their health decreases "+str(dmg)+" points and"+enemy.name+"'s energy decreases "+str(edmg)+" points.")
 
 	def Photosynthesis(self,enemy):
 		print(self.name+" used Photosynthesis!")
@@ -380,7 +385,7 @@ class MCB(Major):
 		print(self.name+"'s energy falters 30 points.")
 		time.sleep(1)
 	moves={'Point Mutation': PointMutation,
-		'Set Curve':SetCurve, 
+		'Set Curve':SetCurve,
 		'Photosynthesis':Photosynthesis,
 		'Mitosis':Mitosis}
 
@@ -488,16 +493,23 @@ win = False
 lose = False
 
 def advance(player):
-	if battle_encounter(player.place):
-		whofights(player, player.place)
-	else:
-		print("It seems too quiet, but the coast is clear!")
-	if player.place == 0:
-		player.place = 1
-	elif player.place == 1:
-		player.place = 2
-	elif player.place == 2:
-		changefloors(player)
+    if player.place == 0:
+   		player.place = 1
+    elif player.place == 1:
+    	player.place = 2
+    elif player.place == 2:
+        changefloors(player)
+    if battle_encounter(player.place):
+        whofights(player, player.place)
+        if player.place == 2:
+            print(tips[player.place-3])
+    else:
+    	print("It seems too quiet, but the coast is clear!")
+
+tips = ["Enemy: Wow, you beat me! As a reward, I'll give you a little tip. Scheme does math with prefix notation, unlike Python's infix notation. Other than that, it reads exactly the same. Pay attention to parens!",
+        "Enemy: Argh, how could I lose to a weakling like you! Well, if you must know, a memoized fibonacci calls all parameters that have already been previously called in theta(1) time. Makes things much faster!",
+        "Enemy: Ugh, how did you get this far? If you can't figure out simple generator expressions, everyone will be disappointed in you!",
+        "Enemy: Well, congratulations on beating me! But ahead lies the big boss, the most fearsome of all in your department!"]
 
 def whofights(player,location):
 	enemy = enemies[location]
@@ -516,7 +528,7 @@ def changefloors(player):
 		LastBoss()
 	player.place = 0
 	player.location = locations[player.floor-3] #floor3 is index 0, etc.
-	
+
 ########## SELECTORS ##########
 
 #Selector function takes in name of location and returns the location object with that name
@@ -561,10 +573,10 @@ def random_major():
 	return majors[int(random.random() * 4)]
 
 
-def LastBoss(): 
+def LastBoss():
         def question1(strikes=0):
                 if strikes >=3:
-                        print( "Hilfinger can no longer take your moronic stupidity. In a fit of rage he clenches his fists, bangs them on the table and screams “You dishonor me! You have dishonored this entire University! I knew by the look of your puny little head that you had a tiny brain to match. You disgust me, and I have no wish to see you any longer. Leave. I reward you an F in my class, and may God have mercy on your soul. \n\t\t THE END")
+                        print( "Hilfinger can no longer take your moronic stupidity. In a fit of rage he clenches his fists, bangs them on the table and screams â€œYou dishonor me! You have dishonored this entire University! I knew by the look of your puny little head that you had a tiny brain to match. You disgust me, and I have no wish to see you any longer. Leave. I reward you an F in my class, and may God have mercy on your soul. \n\t\t THE END")
                         return
                 q1 = input('''QUESTION 1:\nEvaluate the following expression written in Scheme:\n
                 (+ 1 2 (* 3 5) (- 9 (/ 15 3)) 4)\n>>> ''' ) #26
@@ -578,8 +590,8 @@ def LastBoss():
                 elif q1 == '26':
                         question2(strikes)
         def question2(strikes):
-                if strikes >=3:             
-                        print("Hilfinger can no longer take your moronic stupidity. In a fit of rage he clenches his fists, bangs them on the table and screams “You dishonor me! You have dishonored this entire University! I knew by the look of your puny little head that you had a tiny brain to match. You disgust me, and I have no wish to see you any longer. Leave. I reward you an F in my class, and may God have mercy on your soul.\nTHE END")
+                if strikes >=3:
+                        print("Hilfinger can no longer take your moronic stupidity. In a fit of rage he clenches his fists, bangs them on the table and screams â€œYou dishonor me! You have dishonored this entire University! I knew by the look of your puny little head that you had a tiny brain to match. You disgust me, and I have no wish to see you any longer. Leave. I reward you an F in my class, and may God have mercy on your soul.\nTHE END")
                         time.sleep(20)
                         return exit()
 
@@ -589,9 +601,9 @@ def LastBoss():
         for _ in range(n-1):
                 prev,curr = curr, prev+curr+4
         return curr
-Define a simple mathematical function f(n) such that 
-evaluating fn(x) with x=n performing theta(f(n)) 
-function calls. Leave out constants.\n>>> ''' ) 
+Define a simple mathematical function f(n) such that
+evaluating fn(x) with x=n performing theta(f(n))
+function calls. Leave out constants.\n>>> ''' )
                 if q2 != "n":
                         strikes+=1
                         print("Hilfinger's teeth gnash as his brow furrows and his face reddens.")
@@ -604,17 +616,17 @@ function calls. Leave out constants.\n>>> ''' )
 
         def question3(strikes):
                 if strikes >=3:
-                        print("Hilfinger can no longer take your moronic stupidity. In a fit of rage he clenches his fists, bangs them on the table and screams “You dishonor me! You have dishonored this entire University! I knew by the look of your puny little head that you had a tiny brain to match. You disgust me, and I have no wish to see you any longer. Leave. I reward you an F in my class, and may God have mercy on your soul.")
+                        print("Hilfinger can no longer take your moronic stupidity. In a fit of rage he clenches his fists, bangs them on the table and screams â€œYou dishonor me! You have dishonored this entire University! I knew by the look of your puny little head that you had a tiny brain to match. You disgust me, and I have no wish to see you any longer. Leave. I reward you an F in my class, and may God have mercy on your soul.")
                         time.sleep(20)
                         return exit()
 
 
                 q3 = input('''QUESTION 3:\n>>> sequence=[11,13,15,12,14,16]
 >>> summer=(sum((k-5) for k in sequence if ((k%7) >= 2)))
->>> print(summer)\nWhat will be printed?\n>>> ''' ) 
+>>> print(summer)\nWhat will be printed?\n>>> ''' )
                 if q3 != '32':
                         strikes+=1
-                        
+
                         print("Hilfinger's teeth gnash as his brow furrows and his face reddens.")
                         time.sleep(1)
                         print("This is strike number "+str(strikes)+".\n")
@@ -625,6 +637,11 @@ function calls. Leave out constants.\n>>> ''' )
                         print("As you stand proudly looking out the window of Soda Hall you feel a strangely familiar hand on your shoulder, and Hilfinger comments, 'Good job kid, I know you had the smarts to do it,' somehow that hits you right in the feels and you heart starts beating faster. This is it. This is what you've been working for. You are a master of Introductory Python. You did it. We did it. Congratulations. A winner is you.\n\t\t\tTHE END")
                         time.sleep(20)
                         return exit()
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 6e6849f58e43bad7362bfbee8486f950e28d0cc7
         return question1(0)
 print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 print('|                                                         |')
