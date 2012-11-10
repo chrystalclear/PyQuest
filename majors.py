@@ -7,26 +7,26 @@ class Major(object):
 		if action in self.moves:
 			return self.moves[action]
 		 
-class EECS(major):
+class EECS(Major):
 	def __init__(self, name):
 		self.moves={}
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(EECS=.5, History=2)
 	
 
-class History(major):
+class History(Major):
 	def __init__(self, name):
 		self.moves={}
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(MCB=2, EECS=.5)
 
-class MCB(major):
+class MCB(Major):
 	def __init__(self, name):
 		self.moves={}
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(History=.5, Haas=2)
 
-class Haas(major):
+class Haas(Major):
 	def __init__(self, name):
 		self.moves={}
 		self.multipliers=major.multipliers.copy()
