@@ -119,8 +119,9 @@ class MCB(Major):
 			print(energy.name+" was too tired to do that!")
 		print(self.name+" used Point Mutation!")
 		print(self.name+" grows an extra arm and punches you square in the face.")
-		print("Your health decreases to " +str(enemy.hp-=10)+" points.")
+		print("Your health decreases to " +str(enemy.hp-10)+" points.")
 		enemy.atk+=5
+		enemy.hp-=10
 		print(self.name+"'s attack increases to "+str(enemy.atk)+" points.")
 		self.energy-=30
 
@@ -184,7 +185,7 @@ class Haas(Major):
 		self.energy-=energycost
 		dmg=int(.25*self.atk*self.multipliers[enemy.Major])-enemy.defense
 		print(self.name, "exposed", enemy.name, "'s financial flaws for", dmg, "damage!")
-		sleep.time(1)
+		time.sleep(1)
 		enemy.hp-=dmg
 	def Glare(self, enemy):
 		energycost=5
@@ -193,6 +194,6 @@ class Haas(Major):
 		self.energy-=energycost
 		dmg=int(.12*self.atk*self.multipliers[enemy.Major])-enemy.defense
 		print(self.name, "glared at", enemy.name, "for ", dmg, "damage!")
-		sleep.time(1)
+		time.sleep(1)
 		enemy.hp-=dmg
 
