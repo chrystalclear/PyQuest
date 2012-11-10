@@ -266,7 +266,7 @@ class History(Major):
 		time.sleep(1)
 		print("You're at the Battle Stalingrad!")
 		time.sleep(1)
-		dmg=int(self.atk*(enemy.hp/enemy.maxhp)*self.multipliers[enemy.Major])-enemy.defense
+		dmg=int(self.atk*(1+(enemy.hp/enemy.maxhp))*self.multipliers[enemy.Major])-enemy.defense
 		print(enemy.name, "was caught in crossfire for",dmg,"damage!")
 		time.sleep(1)
 		enemy.hp-=dmg
