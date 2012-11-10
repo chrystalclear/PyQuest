@@ -135,10 +135,17 @@ class MCB(Major):
 			print(energy.name+" was too tired to do that!")
 		print(self.name+" used Point Mutation!")
 		print(self.name+" grows an extra arm and punches you square in the face.")
+<<<<<<< HEAD
+		print("Your health decreases to " +str(enemy.hp-10)+" points.")
+		enemy.atk+=5
+		enemy.hp-=10
+		print(self.name+"'s attack increases to "+str(enemy.atk)+" points.")
+=======
 		dmg=int(0.70*self.atk*self.multipliers[enemy.Major])-enemy.defense
 		print("Your health decreases"+str(dmg)+" points.")
 		enemy.atk+=5
 		print(self.name+"'s attack increases 5 points.")
+>>>>>>> b4a57f9cae1937b3045d666b8b8ec70b58b04d5d
 		self.energy-=30
 
 	def SetCurve(self,enemy):
@@ -217,7 +224,7 @@ class Haas(Major):
 		self.energy-=energycost
 		dmg=int(.25*self.atk*self.multipliers[enemy.Major])-enemy.defense
 		print(self.name, "exposed", enemy.name, "'s financial flaws for", dmg, "damage!")
-		sleep.time(1)
+		time.sleep(1)
 		enemy.hp-=dmg
 	def Glare(self, enemy):
 		energycost=5
