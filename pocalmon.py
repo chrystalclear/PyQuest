@@ -165,13 +165,20 @@ def init_locations():
 ########## MAJORS ##########
 
 import time
+class Major(object):
+	def __init__(self, name):
+		self.moves={}
+		self.multipliers={'History': 1, 'MCB': 1, 'Haas': 1, 'EECS': 1}
+
+	def get(self, action):
+		return self.moves[action]
 
 class EECS(Major):
 	def __init__(self, name):
-		self.moves={'Infinite Recursion':InfiniteRecursion,
-     'Abstraction Barrier':AbstractionBarrier,
-     'Pop': Pop,
-     'Hackathon Fuel': HackathonFuel }
+		self.moves={'Infinite Recursion':InfiniteRecursion(), 
+					'Abstraction Barrier':AbstractionBarrier(), 
+					'Pop': Pop(), 
+					'Hackathon Fuel': HackathonFuel() }
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(EECS=.5, History=2)
 	
@@ -179,7 +186,6 @@ class EECS(Major):
 		energycost = 60
 		if self.energy < energycost:
 			print("You're too tired to do that! Rack up some energy by taking some Hackathon Fuel.")
-			return 
 		i=0
 		while i>20:
 			print ("Enemy takes 1 point damage")
@@ -195,7 +201,7 @@ class EECS(Major):
 		self.defense+=2
 		self.energy-=5
 		time.sleep(1)
-		print("Your Abstraction Shield makes you feel safe. Your defense increases 2 points.")
+		print("Your Abstraction Sheild makes you feel safe. Your defense increases 2 points.")
 		print("Your energy decreases 5 points.")
 
 	def Pop(self,enemy):
@@ -209,13 +215,11 @@ class EECS(Major):
 	def HackathonFuel(self,enemy):
 		print("You take a swig of a concoction made of Red Bull, Monster, Coffee, cola, and liquified cocaine.")
 		time.sleep(1)
-		self.health-=5
 		if self.energy+20 >=100:
 			print("Your energy increases to 100 points.")
 		else:
 			self.energy+=20
-			print("Your energy increases 20 points.")
-			print("However, your health decreases by 5 points. Don't do drugs, children!")
+			print("Your energy increases 20 points. ")
 			time.sleep(0.5)
 			print("**BURRRRP**")
 
@@ -223,10 +227,10 @@ class EECS(Major):
 
 class History(Major):
 	def __init__(self, name):
-		self.moves={'Craft Paper':ResearchCraft,
-     'Flintlock':Flintlock,
-     'Trivia':Trivial,
-     'Time Travel':Timeshift}
+		self.moves={'Craft Paper':ResearchCraft, 
+					'Flintlock':Flintlock, 
+					'Trivia':Trivial, 
+					'Time Travel':Timeshift}
 		self.multipliers=Major.multipliers.copy()
 		self.multipliers.update(MCB=2, EECS=.5)
 
@@ -262,8 +266,6 @@ class History(Major):
 		if self.energy<energycost:
 			return str(self.name)+" was too tired to do that!"
 		self.energy-=energycost
-		print(self.name, "used TIME TRAVEL!")
-		time.sleep(1)
 		print("You're at the Battle Stalingrad!")
 		time.sleep(1)
 		dmg=int(self.atk*(enemy.hp/enemy.maxhp)*self.multipliers[enemy.Major])-enemy.defense
@@ -275,8 +277,6 @@ class History(Major):
 		if self.energy<energycost:
 			return str(self.name)+" was too tired to do that!"
 		self.energy-=energycost
-		print(self.name, "draws a flintlock pistol!")
-		time.sleep(1)
 		print(self.name, "shoots", enemy.name,"!" )
 		time.sleep(1)
 		dmg=int(.60*self.atk*self.multipliers[enemy.Major])-enemy.defense
@@ -288,10 +288,10 @@ class History(Major):
 
 class MCB(Major):
 	def __init__(self, name):
-		self.moves={'Point Mutation': PointMutation,
- 			       'Set Curve':SetCurve, 
-       'Photosynthesis':Photosynthesis,
-       'Mitosis':Mitosis}
+		self.moves={'Point Mutation': PointMutation, 
+					'Set Curve':SetCurve, 
+					'Photosynthesis':Photosynthesis,
+					'Mitosis':Mitosis}
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(History=.5, Haas=2)
 
@@ -301,6 +301,10 @@ class MCB(Major):
 			print(energy.name+" was too tired to do that!")
 		print(self.name+" used Point Mutation!")
 		print(self.name+" grows an extra arm and punches you square in the face.")
+		print("Your health decreases to " +str(enemy.hp-10)+" points.")
+		enemy.atk+=5
+		enemy.hp-=10
+		print(self.name+"'s attack increases to "+str(enemy.atk)+" points.")
 		dmg=int(0.70*self.atk*self.multipliers[enemy.Major])-enemy.defense
 		print("Your health decreases"+str(dmg)+" points.")
 		enemy.atk+=5
@@ -345,13 +349,12 @@ class MCB(Major):
 		print(self.name+"'s defense skyrockets to "+str(self.defense)+" points.")
 		print(self.name+"'s energy falters 30 points.")
 
-
 class Haas(Major):
 	def __init__(self, name):
-		self.moves={'Business Plan': BPlan,
-     'Brag':Brag,
-     'Analyze': Analy,
-     'Glare':Glare}
+		self.moves={'Business Plan': BPlan, 
+					'Brag':Brag, 
+					'Analyze': Analy, 
+					'Glare':Glare}
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(MCB=.5, EECS=2)
 	def BPlan(self, enemy):
@@ -359,8 +362,6 @@ class Haas(Major):
 		if self.energy<energycost:
 			return str(self.name)+" was too tired to do that!"
 		self.energy-=energycost
-		print(self.name, "uses BUSINESS PLAN!")
-		time.sleep(1)
 		print(self.name, "presents their startup idea!")
 		time.sleep(1)
 		print('...')
@@ -373,8 +374,6 @@ class Haas(Major):
 		if self.energy<energycost:
 			return str(self.name)+" was too tired to do that!"
 		self.energy-=energycost
-		print(self.name, "uses BRAG!")
-		time.sleep(1)
 		print("'I got job offers from ALL of the Big Four! fufufufu")
 		time.sleep(1)
 		dmg=int(.5*self.atk*self.multipliers[enemy.Major])-enemy.defense
@@ -386,7 +385,6 @@ class Haas(Major):
 		if self.energy<energycost:
 			return str(self.name)+" was too tired to do that!"
 		self.energy-=energycost
-		print(self.name, "uses ANALYSIS!")
 		dmg=int(.25*self.atk*self.multipliers[enemy.Major])-enemy.defense
 		print(self.name, "exposed", enemy.name, "'s financial flaws for", dmg, "damage!")
 		time.sleep(1)
@@ -400,6 +398,8 @@ class Haas(Major):
 		print(self.name, "glared at", enemy.name, "for ", dmg, "damage!")
 		time.sleep(1)
 		enemy.hp-=dmg
+
+
 
 
 
