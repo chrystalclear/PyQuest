@@ -8,28 +8,19 @@
 # Copyright:   (c) Angie 2012
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
+from characters import Player, Enemy
 
-class Player():
-    def __init__():
-        self.hp = 100
+BATTLE_CHOICES ={Attack: attack(), Items: pickItem}
 
-class Enemy():
-    def __init__():
-        self.hp = 100
-
-
+ALL_DIALOGUES = {start : """You are an EECS major at the University of California at Berkeley, and you wake up on a desk after a long, restful nap.
+                            Looking around, the room is empty; all that is around is you and your trusty laptop. What will you do?""",
+                 battle: "START BATTLE"}
+ALL_CHOICES = {start: {}}
 GAME_END = False
 win = False
 
-def main():
-    print(ALL_DIALOGUES[start])
-
-    while not GAME_END:
-        action()
-
-if __name__ == '__main__': main()
-
 def action():
+    print(1)
 
 def getenemy():
     return Enemy()
@@ -43,20 +34,16 @@ def battle(enemy = getenemy()):
             if player.hp == 0:
                 win = False
                 GAME_END = True
-    end
-
-
-
-BATTLE_CHOICES ={Attack: attack(), Items: pickItem}
-
-ALL_DIALOGUES = {start : """You are an EECS major at the University of California at Berkeley, and you wake up on a desk after a long, restful nap.
-                            Looking around, the room is empty; all that is around is you and your trusty laptop. What will you do?""",
-                 battle: "START BATTLE"}
-ALL_CHOICES = {start: {}}
-
-
-
-
 
 class Map():
-    def __init__()
+    def __init__():
+        print(1)
+
+def main():
+    print(ALL_DIALOGUES[start])
+
+    while not GAME_END:
+        action()
+        GAME_END = True
+
+if __name__ == '__main__': main()
