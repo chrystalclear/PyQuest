@@ -2,15 +2,37 @@ class Major(object):
 	def __init__(self, name):
 		self.moves={}
 		self.multipliers={'History': 1, 'MCB': 1, 'Haas': 1, 'EECS': 1}
-		 
-class EECS(major):
+
+	def get(self, action):
+		if action in self.moves:
+			return self.moves[action]
+
+class EECS(Major):
 	def __init__(self, name):
 		self.moves={}
 		self.multipliers=major.multipliers.copy()
 		self.multipliers.update(EECS=.5, History=2)
 	
-	def get(self, action):
-		if action in self.moves:
-			return self.moves[action]
+	@property
+	def InfiniteRecursion:
+		print("Stack overflow. Opponent "+str(eval(repr(enemy.major)))+" has crashed.")
+		enemy.stats['health'] -= 1 
+		print("Enemy stats: "+str(s) for s in enemy.stats)
 
-	def nogirlsallowed
+class History(Major):
+	def __init__(self, name):
+		self.moves={}
+		self.multipliers=major.multipliers.copy()
+		self.multipliers.update(MCB=2, EECS=.5)
+
+class MCB(Major):
+	def __init__(self, name):
+		self.moves={}
+		self.multipliers=major.multipliers.copy()
+		self.multipliers.update(History=.5, Haas=2)
+
+class Haas(Major):
+	def __init__(self, name):
+		self.moves={}
+		self.multipliers=major.multipliers.copy()
+		self.multipliers.update(MCB=.5, EECS=2)
