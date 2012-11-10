@@ -1,5 +1,6 @@
 class Major(object):
 	def __init__(self, name):
-		moves={}
-
+		self.moves={}
+		self.multipliers={'History': 1, 'Math': 1, 'Haas': 1, 'EECS': 1}
+		 
 
