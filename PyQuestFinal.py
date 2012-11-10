@@ -185,7 +185,7 @@ class EECS(Major):
 		self.multipliers.update(EECS=.5, Haas=2, History=.5)
 	
 	def InfiniteRecursion(self,enemy):
-		energycost = 20
+		energycost = 50
 		if self.energy < energycost:
 			print(self.name, " is too tired to do that! Rack up some energy by taking some Hackathon Fuel.")
 			return 
@@ -510,6 +510,9 @@ def whofights(player,location):
 def changefloors(player):
 	player.floor += 1
 	if player.floor == 7:
+		print("As you open the door to the professor's office Hilfinger rotates towards you at his desk. 'I've been waiting for you,", player.name, "let's see if you've improved!")
+        sleep.time(4)
+        print("You are bombarded by questions!")
 		LastBoss()
 	player.place = 0
 	player.location = locations[player.floor-3] #floor3 is index 0, etc.
@@ -622,8 +625,6 @@ function calls. Leave out constants.\n>>> ''' )
                         print("As you stand proudly looking out the window of Soda Hall you feel a strangely familiar hand on your shoulder, and Hilfinger comments, 'Good job kid, I know you had the smarts to do it,' somehow that hits you right in the feels and you heart starts beating faster. This is it. This is what you've been working for. You are a master of Introductory Python. You did it. We did it. Congratulations. A winner is you.\n\t\t\tTHE END")
                         time.sleep(20)
                         return exit()
-                
-                
         return question1(0)
 print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 print('|                                                         |')
